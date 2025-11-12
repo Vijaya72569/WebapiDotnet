@@ -22,11 +22,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
+          
           -name: Restore dependencies
           run: dotnet restore AzureWebapi/AzureWebapi.csproj
 
       - name: Build with dotnet
-        run: dotnet build AzureWebapi/AzureWebapi.csproj --configuration Release --no-restore
+        run: dotnet build AzureWebapi/AzureWebapi.csproj --configuration Release
 
       - name: publish project
         run: dotnet publish AzureWebapi/AzureWebapi.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
@@ -66,3 +67,4 @@ jobs:
           package: .
 
           
+
