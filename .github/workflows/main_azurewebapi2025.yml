@@ -22,12 +22,14 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
+          -name: Restore dependencies
+          run: dotnet restore AzureWebapi/AzureWebapi.csproj
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
+        run: dotnet build AzureWebapi/AzureWebapi.csproj --configuration Release --no-restore
 
-      - name: dotnet publish
-        run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
+      - name: publish project
+        run: dotnet publish AzureWebapi/AzureWebapi.csproj -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -62,4 +64,5 @@ jobs:
           app-name: 'azurewebapi2025'
           slot-name: 'Production'
           package: .
+
           
